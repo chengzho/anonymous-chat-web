@@ -1,0 +1,38 @@
+# Node / Vite
+node_modules/
+dist/
+webui/dist/
+webui/node_modules/
+
+# Environment files
+.env
+.env.*
+!.env.example
+webui/.env
+webui/.env.*
+!webui/.env.example
+
+# AWS SAM / CloudFormation
+.aws-sam/
+.sam/
+samconfig.toml
+
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+.venv/
+venv/
+
+# OS / Editor
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+
+# Logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
