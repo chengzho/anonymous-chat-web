@@ -1,0 +1,1875 @@
+{
+  "version": "2.11",
+  "children": [
+    {
+      "type": "frame",
+      "id": "ixUMU",
+      "x": 0,
+      "y": 0,
+      "name": "Welcome Screen – Mobile",
+      "clip": true,
+      "width": 375,
+      "height": 812,
+      "fill": "#F3F6F8",
+      "layout": "vertical",
+      "padding": 20,
+      "justifyContent": "center",
+      "alignItems": "center",
+      "children": [
+        {
+          "type": "frame",
+          "id": "b0vZW",
+          "name": "mCard",
+          "width": 335,
+          "fill": "#FFFFFF",
+          "cornerRadius": 16,
+          "effect": {
+            "type": "shadow",
+            "shadowType": "outer",
+            "color": "#0000001A",
+            "offset": {
+              "x": 0,
+              "y": 4
+            },
+            "blur": 20
+          },
+          "layout": "vertical",
+          "gap": 24,
+          "padding": 32,
+          "children": [
+            {
+              "type": "text",
+              "id": "Mr79F",
+              "name": "mTitle",
+              "fill": "#2F3C46",
+              "textGrowth": "fixed-width",
+              "width": "fill_container",
+              "content": "匿名聊天室",
+              "textAlign": "center",
+              "fontFamily": "Inter",
+              "fontSize": 28,
+              "fontWeight": "700",
+              "letterSpacing": 2
+            },
+            {
+              "type": "text",
+              "id": "jYIHS",
+              "name": "mSubtitle",
+              "fill": "#6F7D87",
+              "textGrowth": "fixed-width",
+              "width": "fill_container",
+              "content": "安靜、即時、無需註冊",
+              "textAlign": "center",
+              "fontFamily": "Inter",
+              "fontSize": 14,
+              "fontWeight": "normal"
+            },
+            {
+              "type": "frame",
+              "id": "Ed032",
+              "name": "mNickGroup",
+              "width": "fill_container",
+              "layout": "vertical",
+              "gap": 8,
+              "children": [
+                {
+                  "type": "text",
+                  "id": "c5A0e",
+                  "name": "mNickLabel",
+                  "fill": "#2F3C46",
+                  "content": "暱稱",
+                  "fontFamily": "Inter",
+                  "fontSize": 13,
+                  "fontWeight": "normal"
+                },
+                {
+                  "type": "frame",
+                  "id": "cxh07",
+                  "name": "mNickInput",
+                  "width": "fill_container",
+                  "height": 44,
+                  "fill": "#FFFFFF",
+                  "cornerRadius": 8,
+                  "stroke": {
+                    "align": "inside",
+                    "thickness": 1,
+                    "fill": "#D8E1E8"
+                  },
+                  "padding": [
+                    0,
+                    12
+                  ],
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "hxKrC",
+                      "name": "mNickPlaceholder",
+                      "fill": "#6F7D87",
+                      "content": "輸入暱稱",
+                      "fontFamily": "Inter",
+                      "fontSize": 14,
+                      "fontWeight": "normal"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "v1jeC",
+              "name": "mPassGroup",
+              "width": "fill_container",
+              "layout": "vertical",
+              "gap": 8,
+              "children": [
+                {
+                  "type": "text",
+                  "id": "m741D",
+                  "name": "mPassLabel",
+                  "fill": "#2F3C46",
+                  "content": "進入密碼",
+                  "fontFamily": "Inter",
+                  "fontSize": 13,
+                  "fontWeight": "normal"
+                },
+                {
+                  "type": "frame",
+                  "id": "aMdTu",
+                  "name": "mPassInput",
+                  "width": "fill_container",
+                  "height": 44,
+                  "fill": "#FFFFFF",
+                  "cornerRadius": 8,
+                  "stroke": {
+                    "align": "inside",
+                    "thickness": 1,
+                    "fill": "#D8E1E8"
+                  },
+                  "padding": [
+                    0,
+                    12
+                  ],
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "N7Krs",
+                      "name": "mPassPlaceholder",
+                      "fill": "#6F7D87",
+                      "content": "••••••••",
+                      "fontFamily": "Inter",
+                      "fontSize": 14,
+                      "fontWeight": "normal"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "YUZtl",
+              "name": "mBtn",
+              "width": "fill_container",
+              "height": 48,
+              "fill": "#7D9AAE",
+              "cornerRadius": 8,
+              "justifyContent": "center",
+              "alignItems": "center",
+              "children": [
+                {
+                  "type": "text",
+                  "id": "g70JL",
+                  "name": "mBtnText",
+                  "fill": "#FFFFFF",
+                  "content": "進入聊天室",
+                  "fontFamily": "Inter",
+                  "fontSize": 15,
+                  "fontWeight": "600"
+                }
+              ]
+            },
+            {
+              "type": "text",
+              "id": "eMgBt",
+              "name": "mError",
+              "fill": "#C97C7C",
+              "textGrowth": "fixed-width",
+              "width": "fill_container",
+              "content": "暱稱或密碼錯誤，請再試一次",
+              "textAlign": "center",
+              "fontFamily": "Inter",
+              "fontSize": 12,
+              "fontWeight": "normal"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "frame",
+      "id": "g5gfvN",
+      "x": 430,
+      "y": 0,
+      "name": "Welcome Screen – Desktop",
+      "clip": true,
+      "width": 1280,
+      "height": 800,
+      "fill": "#F3F6F8",
+      "layout": "vertical",
+      "justifyContent": "center",
+      "alignItems": "center",
+      "children": [
+        {
+          "type": "frame",
+          "id": "VKof1",
+          "name": "dCard",
+          "width": 480,
+          "fill": "#FFFFFF",
+          "cornerRadius": 20,
+          "effect": {
+            "type": "shadow",
+            "shadowType": "outer",
+            "color": "#0000001A",
+            "offset": {
+              "x": 0,
+              "y": 4
+            },
+            "blur": 24
+          },
+          "layout": "vertical",
+          "gap": 28,
+          "padding": 40,
+          "children": [
+            {
+              "type": "text",
+              "id": "przss",
+              "name": "dTitle",
+              "fill": "#2F3C46",
+              "textGrowth": "fixed-width",
+              "width": "fill_container",
+              "content": "匿名聊天室",
+              "textAlign": "center",
+              "fontFamily": "Inter",
+              "fontSize": 32,
+              "fontWeight": "700",
+              "letterSpacing": 2
+            },
+            {
+              "type": "text",
+              "id": "Ra8YG",
+              "name": "dSubtitle",
+              "fill": "#6F7D87",
+              "textGrowth": "fixed-width",
+              "width": "fill_container",
+              "content": "安靜、即時、無需註冊",
+              "textAlign": "center",
+              "fontFamily": "Inter",
+              "fontSize": 15,
+              "fontWeight": "normal"
+            },
+            {
+              "type": "frame",
+              "id": "XbCfj",
+              "name": "dNickGroup",
+              "width": "fill_container",
+              "layout": "vertical",
+              "gap": 8,
+              "children": [
+                {
+                  "type": "text",
+                  "id": "GIceT",
+                  "name": "dNickLabel",
+                  "fill": "#2F3C46",
+                  "content": "暱稱",
+                  "fontFamily": "Inter",
+                  "fontSize": 13,
+                  "fontWeight": "normal"
+                },
+                {
+                  "type": "frame",
+                  "id": "bP0NV",
+                  "name": "dNickInput",
+                  "width": "fill_container",
+                  "height": 44,
+                  "fill": "#FFFFFF",
+                  "cornerRadius": 8,
+                  "stroke": {
+                    "align": "inside",
+                    "thickness": 1,
+                    "fill": "#D8E1E8"
+                  },
+                  "padding": [
+                    0,
+                    12
+                  ],
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "PblbS",
+                      "name": "dNickPlaceholder",
+                      "fill": "#6F7D87",
+                      "content": "輸入暱稱",
+                      "fontFamily": "Inter",
+                      "fontSize": 14,
+                      "fontWeight": "normal"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "N2mv9n",
+              "name": "dPassGroup",
+              "width": "fill_container",
+              "layout": "vertical",
+              "gap": 8,
+              "children": [
+                {
+                  "type": "text",
+                  "id": "RitSr",
+                  "name": "dPassLabel",
+                  "fill": "#2F3C46",
+                  "content": "進入密碼",
+                  "fontFamily": "Inter",
+                  "fontSize": 13,
+                  "fontWeight": "normal"
+                },
+                {
+                  "type": "frame",
+                  "id": "e81WB",
+                  "name": "dPassInput",
+                  "width": "fill_container",
+                  "height": 44,
+                  "fill": "#FFFFFF",
+                  "cornerRadius": 8,
+                  "stroke": {
+                    "align": "inside",
+                    "thickness": 1,
+                    "fill": "#D8E1E8"
+                  },
+                  "padding": [
+                    0,
+                    12
+                  ],
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "c8JRep",
+                      "name": "dPassPlaceholder",
+                      "fill": "#6F7D87",
+                      "content": "••••••••",
+                      "fontFamily": "Inter",
+                      "fontSize": 14,
+                      "fontWeight": "normal"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "aeHjw",
+              "name": "dBtn",
+              "width": "fill_container",
+              "height": 48,
+              "fill": "#7D9AAE",
+              "cornerRadius": 8,
+              "justifyContent": "center",
+              "alignItems": "center",
+              "children": [
+                {
+                  "type": "text",
+                  "id": "jRD3k",
+                  "name": "dBtnText",
+                  "fill": "#FFFFFF",
+                  "content": "進入聊天室",
+                  "fontFamily": "Inter",
+                  "fontSize": 15,
+                  "fontWeight": "600"
+                }
+              ]
+            },
+            {
+              "type": "text",
+              "id": "ZjKhH",
+              "name": "dError",
+              "fill": "#C97C7C",
+              "textGrowth": "fixed-width",
+              "width": "fill_container",
+              "content": "暱稱或密碼錯誤，請再試一次",
+              "textAlign": "center",
+              "fontFamily": "Inter",
+              "fontSize": 12,
+              "fontWeight": "normal"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "frame",
+      "id": "zeOnp",
+      "x": 0,
+      "y": 880,
+      "name": "Chat Screen – Mobile",
+      "clip": true,
+      "width": 375,
+      "height": 812,
+      "fill": "#F3F6F8",
+      "layout": "vertical",
+      "children": [
+        {
+          "type": "frame",
+          "id": "E8g9HA",
+          "name": "Header",
+          "width": "fill_container",
+          "height": 56,
+          "fill": "#FFFFFF",
+          "stroke": {
+            "align": "outside",
+            "thickness": 1,
+            "fill": "#E8EDF0"
+          },
+          "padding": [
+            0,
+            16
+          ],
+          "justifyContent": "space_between",
+          "alignItems": "center",
+          "children": [
+            {
+              "type": "text",
+              "id": "t40iGe",
+              "name": "headerTitle",
+              "fill": "#2F3C46",
+              "content": "匿名聊天室",
+              "fontFamily": "Inter",
+              "fontSize": 17,
+              "fontWeight": "700"
+            },
+            {
+              "type": "frame",
+              "id": "D73KHd",
+              "name": "headerStatus",
+              "gap": 6,
+              "alignItems": "center",
+              "children": [
+                {
+                  "type": "ellipse",
+                  "id": "ryu9M",
+                  "name": "statusDot",
+                  "fill": "#6FA67A",
+                  "width": 8,
+                  "height": 8
+                },
+                {
+                  "type": "text",
+                  "id": "t1xSOQ",
+                  "name": "statusText",
+                  "fill": "#6FA67A",
+                  "content": "已連線",
+                  "fontFamily": "Inter",
+                  "fontSize": 12,
+                  "fontWeight": "500"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "frame",
+          "id": "kGg3M",
+          "name": "Message List",
+          "width": "fill_container",
+          "height": "fill_container",
+          "fill": "#F7F9FA",
+          "layout": "vertical",
+          "gap": 14,
+          "padding": [
+            20,
+            16,
+            8,
+            16
+          ],
+          "children": [
+            {
+              "type": "frame",
+              "id": "k5ALO",
+              "name": "System Msg",
+              "width": "fill_container",
+              "justifyContent": "center",
+              "children": [
+                {
+                  "type": "text",
+                  "id": "uGxlc",
+                  "name": "sysTxt1",
+                  "fill": "#9AABB4",
+                  "content": "CoolDog 已加入聊天室",
+                  "fontFamily": "Inter",
+                  "fontSize": 11,
+                  "fontWeight": "normal"
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "S7a4uX",
+              "name": "Other Msg Row",
+              "width": "fill_container",
+              "gap": 8,
+              "alignItems": "end",
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "U9lAAe",
+                  "name": "avatarOther1",
+                  "width": 28,
+                  "height": 28,
+                  "fill": "#B8CDD9",
+                  "cornerRadius": 14,
+                  "layout": "vertical",
+                  "justifyContent": "center",
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "Iqc3T",
+                      "name": "avatarText1",
+                      "fill": "#FFFFFF",
+                      "content": "C",
+                      "fontFamily": "Inter",
+                      "fontSize": 12,
+                      "fontWeight": "700"
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "mcdMs",
+                  "name": "otherBubbleWrap1",
+                  "layout": "vertical",
+                  "gap": 3,
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "nFUPY",
+                      "name": "otherCallsign1",
+                      "fill": "#6F7D87",
+                      "content": "CoolDog",
+                      "fontFamily": "Inter",
+                      "fontSize": 11,
+                      "fontWeight": "500"
+                    },
+                    {
+                      "type": "frame",
+                      "id": "Qtwef",
+                      "name": "otherBubble1",
+                      "fill": "#EBF0F4",
+                      "cornerRadius": [
+                        0,
+                        14,
+                        14,
+                        14
+                      ],
+                      "padding": [
+                        10,
+                        12
+                      ],
+                      "children": [
+                        {
+                          "type": "text",
+                          "id": "NnXSZ",
+                          "name": "otherText1",
+                          "fill": "#2F3C46",
+                          "textGrowth": "fixed-width",
+                          "width": 200,
+                          "content": "嗨！大家好 👋",
+                          "lineHeight": 1.4,
+                          "fontFamily": "Inter",
+                          "fontSize": 14,
+                          "fontWeight": "normal"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "text",
+                      "id": "PYkET",
+                      "name": "otherTime1",
+                      "fill": "#B8C4CC",
+                      "content": "14:02",
+                      "fontFamily": "Inter",
+                      "fontSize": 10,
+                      "fontWeight": "normal"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "n3tD22",
+              "name": "Other Msg 2",
+              "width": "fill_container",
+              "gap": 8,
+              "alignItems": "end",
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "AVvy9",
+                  "name": "avatarOther2",
+                  "width": 28,
+                  "height": 28,
+                  "fill": "#B8CDD9",
+                  "cornerRadius": 14,
+                  "layout": "vertical",
+                  "justifyContent": "center",
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "j1R8g",
+                      "name": "avatarText2",
+                      "fill": "#FFFFFF",
+                      "content": "C",
+                      "fontFamily": "Inter",
+                      "fontSize": 12,
+                      "fontWeight": "700"
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "TdyTF",
+                  "name": "otherBubbleWrap2",
+                  "layout": "vertical",
+                  "gap": 3,
+                  "children": [
+                    {
+                      "type": "frame",
+                      "id": "hra1q",
+                      "name": "otherBubble2",
+                      "fill": "#EBF0F4",
+                      "cornerRadius": [
+                        0,
+                        14,
+                        14,
+                        14
+                      ],
+                      "padding": [
+                        10,
+                        12
+                      ],
+                      "children": [
+                        {
+                          "type": "text",
+                          "id": "l1yhbw",
+                          "name": "otherText2",
+                          "fill": "#2F3C46",
+                          "textGrowth": "fixed-width",
+                          "width": 180,
+                          "content": "今天天氣不錯，很適合聊天",
+                          "lineHeight": 1.4,
+                          "fontFamily": "Inter",
+                          "fontSize": 14,
+                          "fontWeight": "normal"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "text",
+                      "id": "Tknz5",
+                      "name": "otherTime2",
+                      "fill": "#B8C4CC",
+                      "content": "14:03",
+                      "fontFamily": "Inter",
+                      "fontSize": 10,
+                      "fontWeight": "normal"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "FBPzA",
+              "name": "Own Msg 1",
+              "width": "fill_container",
+              "gap": 8,
+              "justifyContent": "end",
+              "alignItems": "end",
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "AERQE",
+                  "name": "ownBubbleWrap1",
+                  "layout": "vertical",
+                  "gap": 3,
+                  "alignItems": "end",
+                  "children": [
+                    {
+                      "type": "frame",
+                      "id": "K2dXz",
+                      "name": "ownBubble1",
+                      "fill": "#C8DDEA",
+                      "cornerRadius": [
+                        14,
+                        0,
+                        14,
+                        14
+                      ],
+                      "padding": [
+                        10,
+                        12
+                      ],
+                      "children": [
+                        {
+                          "type": "text",
+                          "id": "Lspz7",
+                          "name": "ownText1",
+                          "fill": "#2F3C46",
+                          "textGrowth": "fixed-width",
+                          "width": 190,
+                          "content": "你好！很高興認識大家 😊",
+                          "lineHeight": 1.4,
+                          "fontFamily": "Inter",
+                          "fontSize": 14,
+                          "fontWeight": "normal"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "text",
+                      "id": "h7FF1i",
+                      "name": "ownTime1",
+                      "fill": "#B8C4CC",
+                      "content": "14:04",
+                      "fontFamily": "Inter",
+                      "fontSize": 10,
+                      "fontWeight": "normal"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "lNPm0",
+              "name": "System Msg 2",
+              "width": "fill_container",
+              "justifyContent": "center",
+              "children": [
+                {
+                  "type": "text",
+                  "id": "h7Xwi",
+                  "name": "sysTxt2",
+                  "fill": "#9AABB4",
+                  "content": "StarDust 已加入聊天室",
+                  "fontFamily": "Inter",
+                  "fontSize": 11,
+                  "fontWeight": "normal"
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "MsgQP",
+              "name": "Other Msg 3",
+              "width": "fill_container",
+              "gap": 8,
+              "alignItems": "end",
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "WzPcJ",
+                  "name": "avatarOther3",
+                  "width": 28,
+                  "height": 28,
+                  "fill": "#9BB8C9",
+                  "cornerRadius": 14,
+                  "layout": "vertical",
+                  "justifyContent": "center",
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "b3UzNp",
+                      "name": "avatarText3",
+                      "fill": "#FFFFFF",
+                      "content": "S",
+                      "fontFamily": "Inter",
+                      "fontSize": 12,
+                      "fontWeight": "700"
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "s04mb",
+                  "name": "otherBubbleWrap3",
+                  "layout": "vertical",
+                  "gap": 3,
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "Uq69Z",
+                      "name": "otherCallsign3",
+                      "fill": "#6F7D87",
+                      "content": "StarDust",
+                      "fontFamily": "Inter",
+                      "fontSize": 11,
+                      "fontWeight": "500"
+                    },
+                    {
+                      "type": "frame",
+                      "id": "r9exKc",
+                      "name": "otherBubble3",
+                      "fill": "#EBF0F4",
+                      "cornerRadius": [
+                        0,
+                        14,
+                        14,
+                        14
+                      ],
+                      "padding": [
+                        10,
+                        12
+                      ],
+                      "children": [
+                        {
+                          "type": "text",
+                          "id": "kaH5F",
+                          "name": "otherText3",
+                          "fill": "#2F3C46",
+                          "textGrowth": "fixed-width",
+                          "width": 170,
+                          "content": "我也剛進來，大家好！",
+                          "lineHeight": 1.4,
+                          "fontFamily": "Inter",
+                          "fontSize": 14,
+                          "fontWeight": "normal"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "text",
+                      "id": "X0bW4",
+                      "name": "otherTime3",
+                      "fill": "#B8C4CC",
+                      "content": "14:05",
+                      "fontFamily": "Inter",
+                      "fontSize": 10,
+                      "fontWeight": "normal"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "Z5zvz",
+              "name": "Own Msg 2",
+              "width": "fill_container",
+              "gap": 8,
+              "justifyContent": "end",
+              "alignItems": "end",
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "P2Rao",
+                  "name": "ownBubbleWrap2",
+                  "layout": "vertical",
+                  "gap": 3,
+                  "alignItems": "end",
+                  "children": [
+                    {
+                      "type": "frame",
+                      "id": "m3i6al",
+                      "name": "ownBubble2",
+                      "fill": "#C8DDEA",
+                      "cornerRadius": [
+                        14,
+                        0,
+                        14,
+                        14
+                      ],
+                      "padding": [
+                        10,
+                        12
+                      ],
+                      "children": [
+                        {
+                          "type": "text",
+                          "id": "wmsTw",
+                          "name": "ownText2",
+                          "fill": "#2F3C46",
+                          "textGrowth": "fixed-width",
+                          "width": 160,
+                          "content": "有人想聊什麼嗎？",
+                          "lineHeight": 1.4,
+                          "fontFamily": "Inter",
+                          "fontSize": 14,
+                          "fontWeight": "normal"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "text",
+                      "id": "SJryV",
+                      "name": "ownTime2",
+                      "fill": "#B8C4CC",
+                      "content": "14:06",
+                      "fontFamily": "Inter",
+                      "fontSize": 10,
+                      "fontWeight": "normal"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "XIfdg",
+              "name": "mGhost",
+              "width": "fill_container",
+              "gap": 8,
+              "alignItems": "end",
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "sxhxd",
+                  "name": "mGhostAv",
+                  "width": 28,
+                  "height": 28,
+                  "fill": "#A8C4B8",
+                  "cornerRadius": 14,
+                  "layout": "vertical",
+                  "justifyContent": "center",
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "AWFcu",
+                      "name": "mGhostAvT",
+                      "fill": "#FFFFFF",
+                      "content": "G",
+                      "fontFamily": "Inter",
+                      "fontSize": 12,
+                      "fontWeight": "700"
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "Fbk2Q",
+                  "name": "mGhostWrap",
+                  "layout": "vertical",
+                  "gap": 3,
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "CgVjG",
+                      "name": "mGhostName",
+                      "fill": "#6F7D87",
+                      "content": "Ghost42",
+                      "fontFamily": "Inter",
+                      "fontSize": 11,
+                      "fontWeight": "500"
+                    },
+                    {
+                      "type": "frame",
+                      "id": "XA2GG",
+                      "name": "mGhostBub",
+                      "fill": "#EBF0F4",
+                      "cornerRadius": [
+                        0,
+                        14,
+                        14,
+                        14
+                      ],
+                      "padding": [
+                        10,
+                        12
+                      ],
+                      "children": [
+                        {
+                          "type": "text",
+                          "id": "J1bVY",
+                          "name": "mGhostTxt",
+                          "fill": "#2F3C46",
+                          "textGrowth": "fixed-width",
+                          "width": 190,
+                          "content": "有人知道今天有沒有人來？",
+                          "lineHeight": 1.4,
+                          "fontFamily": "Inter",
+                          "fontSize": 14,
+                          "fontWeight": "normal"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "text",
+                      "id": "ZwTek",
+                      "name": "mGhostTime",
+                      "fill": "#B8C4CC",
+                      "content": "14:07",
+                      "fontFamily": "Inter",
+                      "fontSize": 10,
+                      "fontWeight": "normal"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "mdtQg",
+              "name": "mOwn3",
+              "width": "fill_container",
+              "gap": 8,
+              "justifyContent": "end",
+              "alignItems": "end",
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "l3KRC",
+                  "name": "mOwn3Wrap",
+                  "layout": "vertical",
+                  "gap": 3,
+                  "alignItems": "end",
+                  "children": [
+                    {
+                      "type": "frame",
+                      "id": "sZ3ec",
+                      "name": "mOwn3Bub",
+                      "fill": "#C8DDEA",
+                      "cornerRadius": [
+                        14,
+                        0,
+                        14,
+                        14
+                      ],
+                      "padding": [
+                        10,
+                        12
+                      ],
+                      "children": [
+                        {
+                          "type": "text",
+                          "id": "OYtCp",
+                          "name": "mOwn3Txt",
+                          "fill": "#2F3C46",
+                          "textGrowth": "fixed-width",
+                          "width": 145,
+                          "content": "我在！剛進來 😅",
+                          "lineHeight": 1.4,
+                          "fontFamily": "Inter",
+                          "fontSize": 14,
+                          "fontWeight": "normal"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "text",
+                      "id": "O0LcD0",
+                      "name": "mOwn3Time",
+                      "fill": "#B8C4CC",
+                      "content": "14:08",
+                      "fontFamily": "Inter",
+                      "fontSize": 10,
+                      "fontWeight": "normal"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "frame",
+          "id": "N3QXGX",
+          "name": "Input Bar",
+          "width": "fill_container",
+          "height": 64,
+          "fill": "#FFFFFF",
+          "stroke": {
+            "align": "outside",
+            "thickness": 1,
+            "fill": "#E8EDF0"
+          },
+          "gap": 8,
+          "padding": [
+            10,
+            16,
+            16,
+            16
+          ],
+          "alignItems": "center",
+          "children": [
+            {
+              "type": "frame",
+              "id": "TxQ5O",
+              "name": "Input Field",
+              "width": "fill_container",
+              "height": 40,
+              "fill": "#F3F6F8",
+              "cornerRadius": 22,
+              "stroke": {
+                "align": "inside",
+                "thickness": 1,
+                "fill": "#D8E1E8"
+              },
+              "padding": [
+                0,
+                16
+              ],
+              "alignItems": "center",
+              "children": [
+                {
+                  "type": "text",
+                  "id": "lvV3i",
+                  "name": "inputPlaceholder",
+                  "fill": "#B0BCC4",
+                  "content": "輸入訊息…",
+                  "fontFamily": "Inter",
+                  "fontSize": 14,
+                  "fontWeight": "normal"
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "ExnZe",
+              "name": "Send Button",
+              "width": 44,
+              "height": 44,
+              "fill": "#7D9AAE",
+              "cornerRadius": 22,
+              "layout": "vertical",
+              "justifyContent": "center",
+              "alignItems": "center",
+              "children": [
+                {
+                  "type": "path",
+                  "id": "fi6Lk",
+                  "name": "sendIcon",
+                  "geometry": "M2 12l20-10-10 20-2-8-8-2z",
+                  "viewBox": [
+                    0,
+                    0,
+                    24,
+                    24
+                  ],
+                  "fill": "#FFFFFF",
+                  "width": 18,
+                  "height": 18
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "frame",
+      "id": "Ifp9K",
+      "x": 430,
+      "y": 880,
+      "name": "Chat Screen – Desktop",
+      "clip": true,
+      "width": 1280,
+      "height": 800,
+      "fill": "#F3F6F8",
+      "layout": "vertical",
+      "children": [
+        {
+          "type": "frame",
+          "id": "JH2HT",
+          "name": "Desktop Outer",
+          "width": "fill_container",
+          "height": "fill_container",
+          "fill": "#F3F6F8",
+          "layout": "vertical",
+          "justifyContent": "center",
+          "alignItems": "center",
+          "children": [
+            {
+              "type": "frame",
+              "id": "O0ejcR",
+              "name": "Chat Card",
+              "clip": true,
+              "width": 800,
+              "height": 680,
+              "fill": "#FFFFFF",
+              "cornerRadius": 16,
+              "effect": {
+                "type": "shadow",
+                "shadowType": "outer",
+                "color": "#2F3C4615",
+                "offset": {
+                  "x": 0,
+                  "y": 4
+                },
+                "blur": 24
+              },
+              "layout": "vertical",
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "TmSN8",
+                  "name": "Header",
+                  "width": "fill_container",
+                  "height": 60,
+                  "fill": "#FFFFFF",
+                  "stroke": {
+                    "align": "inside",
+                    "thickness": {
+                      "bottom": 1
+                    },
+                    "fill": "#E8EDF0"
+                  },
+                  "padding": [
+                    0,
+                    24
+                  ],
+                  "justifyContent": "space_between",
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "H5JQ1",
+                      "fill": "#2F3C46",
+                      "content": "匿名聊天室",
+                      "fontFamily": "Inter",
+                      "fontSize": 17,
+                      "fontWeight": "700"
+                    },
+                    {
+                      "type": "frame",
+                      "id": "JC95B",
+                      "name": "hRight",
+                      "gap": 6,
+                      "alignItems": "center",
+                      "children": [
+                        {
+                          "type": "ellipse",
+                          "id": "j1O2sn",
+                          "fill": "#6FA67A",
+                          "width": 8,
+                          "height": 8
+                        },
+                        {
+                          "type": "text",
+                          "id": "EjNrd",
+                          "fill": "#6FA67A",
+                          "content": "已連線",
+                          "fontFamily": "Inter",
+                          "fontSize": 13,
+                          "fontWeight": "normal"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "FJmNy",
+                  "name": "Message List",
+                  "width": "fill_container",
+                  "height": "fill_container",
+                  "fill": "#F7F9FA",
+                  "layout": "vertical",
+                  "gap": 16,
+                  "padding": 24,
+                  "children": [
+                    {
+                      "type": "frame",
+                      "id": "XsLFP",
+                      "name": "sys1",
+                      "width": "fill_container",
+                      "justifyContent": "center",
+                      "children": [
+                        {
+                          "type": "text",
+                          "id": "lRnb8",
+                          "fill": "#9AABB4",
+                          "content": "CoolDog 已加入聊天室",
+                          "fontFamily": "Inter",
+                          "fontSize": 11,
+                          "fontWeight": "normal"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "frame",
+                      "id": "rPGDf",
+                      "name": "msg2",
+                      "width": "fill_container",
+                      "layout": "vertical",
+                      "gap": 4,
+                      "children": [
+                        {
+                          "type": "frame",
+                          "id": "KwxHQ",
+                          "name": "m2row",
+                          "gap": 8,
+                          "children": [
+                            {
+                              "type": "frame",
+                              "id": "rCK0O",
+                              "name": "av2",
+                              "width": 32,
+                              "height": 32,
+                              "fill": "#B8CDD9",
+                              "cornerRadius": 16,
+                              "justifyContent": "center",
+                              "alignItems": "center",
+                              "children": [
+                                {
+                                  "type": "text",
+                                  "id": "F59tzY",
+                                  "fill": "#FFFFFF",
+                                  "content": "C",
+                                  "fontFamily": "Inter",
+                                  "fontSize": 13,
+                                  "fontWeight": "700"
+                                }
+                              ]
+                            },
+                            {
+                              "type": "frame",
+                              "id": "FLjVW",
+                              "name": "m2col",
+                              "layout": "vertical",
+                              "gap": 3,
+                              "children": [
+                                {
+                                  "type": "text",
+                                  "id": "Pqxyn",
+                                  "fill": "#6F7D87",
+                                  "content": "CoolDog",
+                                  "fontFamily": "Inter",
+                                  "fontSize": 11,
+                                  "fontWeight": "normal"
+                                },
+                                {
+                                  "type": "frame",
+                                  "id": "k86xN",
+                                  "name": "bbl2",
+                                  "fill": "#EBF0F4",
+                                  "cornerRadius": [
+                                    0,
+                                    14,
+                                    14,
+                                    14
+                                  ],
+                                  "padding": [
+                                    8,
+                                    12
+                                  ],
+                                  "children": [
+                                    {
+                                      "type": "text",
+                                      "id": "u0dqKt",
+                                      "fill": "#2F3C46",
+                                      "content": "喨！大家好 👋",
+                                      "fontFamily": "Inter",
+                                      "fontSize": 14,
+                                      "fontWeight": "normal"
+                                    }
+                                  ]
+                                }
+                              ]
+                            }
+                          ]
+                        },
+                        {
+                          "type": "frame",
+                          "id": "a3bxB",
+                          "name": "m2ts",
+                          "width": "fill_container",
+                          "padding": [
+                            0,
+                            0,
+                            0,
+                            40
+                          ],
+                          "children": [
+                            {
+                              "type": "text",
+                              "id": "skoaF",
+                              "fill": "#B8C4CC",
+                              "content": "14:02",
+                              "fontFamily": "Inter",
+                              "fontSize": 10,
+                              "fontWeight": "normal"
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "type": "frame",
+                      "id": "F3j8A3",
+                      "name": "msg3",
+                      "width": "fill_container",
+                      "layout": "vertical",
+                      "gap": 4,
+                      "alignItems": "end",
+                      "children": [
+                        {
+                          "type": "frame",
+                          "id": "rmr1s",
+                          "name": "bbl3",
+                          "fill": "#C8DDEA",
+                          "cornerRadius": [
+                            14,
+                            0,
+                            14,
+                            14
+                          ],
+                          "padding": [
+                            8,
+                            12
+                          ],
+                          "children": [
+                            {
+                              "type": "text",
+                              "id": "E9uDN",
+                              "fill": "#2F3C46",
+                              "content": "你好！很高興認識大家 😊",
+                              "fontFamily": "Inter",
+                              "fontSize": 14,
+                              "fontWeight": "normal"
+                            }
+                          ]
+                        },
+                        {
+                          "type": "text",
+                          "id": "d5279G",
+                          "fill": "#B8C4CC",
+                          "content": "14:04",
+                          "fontFamily": "Inter",
+                          "fontSize": 10,
+                          "fontWeight": "normal"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "frame",
+                      "id": "wNTme",
+                      "name": "sys4",
+                      "width": "fill_container",
+                      "justifyContent": "center",
+                      "children": [
+                        {
+                          "type": "text",
+                          "id": "pNjgp",
+                          "fill": "#9AABBA",
+                          "content": "StarDust 已加入聊天室",
+                          "fontFamily": "Inter",
+                          "fontSize": 11,
+                          "fontWeight": "normal"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "frame",
+                      "id": "RGmOT",
+                      "name": "msg5",
+                      "width": "fill_container",
+                      "layout": "vertical",
+                      "gap": 4,
+                      "children": [
+                        {
+                          "type": "frame",
+                          "id": "ExebG",
+                          "name": "m5row",
+                          "gap": 8,
+                          "children": [
+                            {
+                              "type": "frame",
+                              "id": "p6oHw",
+                              "name": "av5",
+                              "width": 32,
+                              "height": 32,
+                              "fill": "#9BB8C9",
+                              "cornerRadius": 16,
+                              "justifyContent": "center",
+                              "alignItems": "center",
+                              "children": [
+                                {
+                                  "type": "text",
+                                  "id": "YD937",
+                                  "fill": "#FFFFFF",
+                                  "content": "S",
+                                  "fontFamily": "Inter",
+                                  "fontSize": 13,
+                                  "fontWeight": "700"
+                                }
+                              ]
+                            },
+                            {
+                              "type": "frame",
+                              "id": "duf1Z",
+                              "name": "m5col",
+                              "layout": "vertical",
+                              "gap": 3,
+                              "children": [
+                                {
+                                  "type": "text",
+                                  "id": "DfZej",
+                                  "fill": "#6F7D87",
+                                  "content": "StarDust",
+                                  "fontFamily": "Inter",
+                                  "fontSize": 11,
+                                  "fontWeight": "normal"
+                                },
+                                {
+                                  "type": "frame",
+                                  "id": "iNh7V",
+                                  "name": "bbl5",
+                                  "fill": "#EBF0F4",
+                                  "cornerRadius": [
+                                    0,
+                                    14,
+                                    14,
+                                    14
+                                  ],
+                                  "padding": [
+                                    8,
+                                    12
+                                  ],
+                                  "children": [
+                                    {
+                                      "type": "text",
+                                      "id": "TeHkE",
+                                      "fill": "#2F3C46",
+                                      "content": "我也剛進來，大家好！",
+                                      "fontFamily": "Inter",
+                                      "fontSize": 14,
+                                      "fontWeight": "normal"
+                                    }
+                                  ]
+                                }
+                              ]
+                            }
+                          ]
+                        },
+                        {
+                          "type": "frame",
+                          "id": "obinO",
+                          "name": "m5ts",
+                          "width": "fill_container",
+                          "padding": [
+                            0,
+                            0,
+                            0,
+                            40
+                          ],
+                          "children": [
+                            {
+                              "type": "text",
+                              "id": "rO4MG",
+                              "fill": "#B8C4CC",
+                              "content": "14:05",
+                              "fontFamily": "Inter",
+                              "fontSize": 10,
+                              "fontWeight": "normal"
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "type": "frame",
+                      "id": "w1AAQ",
+                      "name": "msg6",
+                      "width": "fill_container",
+                      "layout": "vertical",
+                      "gap": 4,
+                      "alignItems": "end",
+                      "children": [
+                        {
+                          "type": "frame",
+                          "id": "u8O2R",
+                          "name": "bbl6",
+                          "fill": "#C8DDEA",
+                          "cornerRadius": [
+                            14,
+                            0,
+                            14,
+                            14
+                          ],
+                          "padding": [
+                            8,
+                            12
+                          ],
+                          "children": [
+                            {
+                              "type": "text",
+                              "id": "K1GrS",
+                              "fill": "#2F3C46",
+                              "content": "有人想聊什麼嗎？",
+                              "fontFamily": "Inter",
+                              "fontSize": 14,
+                              "fontWeight": "normal"
+                            }
+                          ]
+                        },
+                        {
+                          "type": "text",
+                          "id": "Zwp7P",
+                          "fill": "#B8C4CC",
+                          "content": "14:06",
+                          "fontFamily": "Inter",
+                          "fontSize": 10,
+                          "fontWeight": "normal"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "frame",
+                      "id": "hQsFr",
+                      "name": "msg7",
+                      "width": "fill_container",
+                      "layout": "vertical",
+                      "gap": 4,
+                      "children": [
+                        {
+                          "type": "frame",
+                          "id": "B49YYB",
+                          "name": "m7row",
+                          "gap": 8,
+                          "children": [
+                            {
+                              "type": "frame",
+                              "id": "Bdh3y",
+                              "name": "av7",
+                              "width": 32,
+                              "height": 32,
+                              "fill": "#A8C4B8",
+                              "cornerRadius": 16,
+                              "justifyContent": "center",
+                              "alignItems": "center",
+                              "children": [
+                                {
+                                  "type": "text",
+                                  "id": "Vihba",
+                                  "fill": "#FFFFFF",
+                                  "content": "G",
+                                  "fontFamily": "Inter",
+                                  "fontSize": 13,
+                                  "fontWeight": "700"
+                                }
+                              ]
+                            },
+                            {
+                              "type": "frame",
+                              "id": "rpXGq",
+                              "name": "m7col",
+                              "layout": "vertical",
+                              "gap": 3,
+                              "children": [
+                                {
+                                  "type": "text",
+                                  "id": "t3mfh8",
+                                  "fill": "#6F7D87",
+                                  "content": "Ghost42",
+                                  "fontFamily": "Inter",
+                                  "fontSize": 11,
+                                  "fontWeight": "normal"
+                                },
+                                {
+                                  "type": "frame",
+                                  "id": "ij5qV",
+                                  "name": "bbl7",
+                                  "fill": "#EBF0F4",
+                                  "cornerRadius": [
+                                    0,
+                                    14,
+                                    14,
+                                    14
+                                  ],
+                                  "padding": [
+                                    8,
+                                    12
+                                  ],
+                                  "children": [
+                                    {
+                                      "type": "text",
+                                      "id": "ilW3F",
+                                      "fill": "#2F3C46",
+                                      "content": "有人知道今天有沒有人來？",
+                                      "fontFamily": "Inter",
+                                      "fontSize": 14,
+                                      "fontWeight": "normal"
+                                    }
+                                  ]
+                                }
+                              ]
+                            }
+                          ]
+                        },
+                        {
+                          "type": "frame",
+                          "id": "ixyne",
+                          "name": "m7ts",
+                          "width": "fill_container",
+                          "padding": [
+                            0,
+                            0,
+                            0,
+                            40
+                          ],
+                          "children": [
+                            {
+                              "type": "text",
+                              "id": "vCZMs",
+                              "fill": "#B8C4CC",
+                              "content": "14:07",
+                              "fontFamily": "Inter",
+                              "fontSize": 10,
+                              "fontWeight": "normal"
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "type": "frame",
+                      "id": "wBbgD",
+                      "name": "msg8",
+                      "width": "fill_container",
+                      "layout": "vertical",
+                      "gap": 4,
+                      "alignItems": "end",
+                      "children": [
+                        {
+                          "type": "frame",
+                          "id": "pqYah",
+                          "name": "bbl8",
+                          "fill": "#C8DDEA",
+                          "cornerRadius": [
+                            14,
+                            0,
+                            14,
+                            14
+                          ],
+                          "padding": [
+                            8,
+                            12
+                          ],
+                          "children": [
+                            {
+                              "type": "text",
+                              "id": "GGU9Q",
+                              "fill": "#2F3C46",
+                              "content": "我在！剛剛才進來 😅",
+                              "fontFamily": "Inter",
+                              "fontSize": 14,
+                              "fontWeight": "normal"
+                            }
+                          ]
+                        },
+                        {
+                          "type": "text",
+                          "id": "MPSdP",
+                          "fill": "#B8C4CC",
+                          "content": "14:08",
+                          "fontFamily": "Inter",
+                          "fontSize": 10,
+                          "fontWeight": "normal"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "ry87J",
+                  "name": "Input Bar",
+                  "width": "fill_container",
+                  "height": 64,
+                  "fill": "#FFFFFF",
+                  "stroke": {
+                    "align": "inside",
+                    "thickness": {
+                      "top": 1
+                    },
+                    "fill": "#E8EDF0"
+                  },
+                  "gap": 16,
+                  "padding": [
+                    12,
+                    20
+                  ],
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "frame",
+                      "id": "DDvnt",
+                      "name": "inputField",
+                      "width": "fill_container",
+                      "height": 40,
+                      "fill": "#F3F6F8",
+                      "cornerRadius": 22,
+                      "stroke": {
+                        "align": "inside",
+                        "thickness": 1,
+                        "fill": "#D8E1E8"
+                      },
+                      "padding": [
+                        0,
+                        0,
+                        0,
+                        16
+                      ],
+                      "alignItems": "center",
+                      "children": [
+                        {
+                          "type": "text",
+                          "id": "QXqEn",
+                          "fill": "#B8C4CC",
+                          "content": "輸入訊息…",
+                          "fontFamily": "Inter",
+                          "fontSize": 14,
+                          "fontWeight": "normal"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "frame",
+                      "id": "f80Qk",
+                      "name": "sendBtn",
+                      "width": 40,
+                      "height": 40,
+                      "fill": "#7D9AAE",
+                      "cornerRadius": 20,
+                      "justifyContent": "center",
+                      "alignItems": "center",
+                      "children": [
+                        {
+                          "type": "icon_font",
+                          "id": "YXF6D",
+                          "width": 18,
+                          "height": 18,
+                          "iconFontName": "send",
+                          "iconFontFamily": "lucide",
+                          "fill": "#FFFFFF"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

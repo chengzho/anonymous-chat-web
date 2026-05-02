@@ -1,0 +1,64 @@
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+html, body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  background-color: #F3F6F8;
+  color: #2F3C46;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+#root {
+  min-height: 100dvh;
+}
+
+input, button, textarea {
+  font-family: inherit;
+}
+
+/* On desktop: chat card is a centered panel, not full height */
+@media (min-width: 768px) {
+  .chat-card {
+    height: 78vh !important;
+    min-height: 520px;
+    max-height: 860px;
+    border-radius: 16px !important;
+    margin: auto;
+  }
+}
+
+/* On desktop: welcome card gets more padding */
+@media (min-width: 768px) {
+  .welcome-card {
+    padding: 40px !important;
+    max-width: 440px !important;
+    border-radius: 20px !important;
+  }
+}
+
+/* Mobile refinements */
+@media (max-width: 480px) {
+  .welcome-card {
+    padding: 32px 24px !important;
+    border-radius: 16px !important;
+  }
+}
+
+/* Scrollbar styling */
+::-webkit-scrollbar {
+  width: 6px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: #D8E1E8;
+  border-radius: 3px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #B8C4CC;
+}
