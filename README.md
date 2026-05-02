@@ -148,20 +148,16 @@ VITE_WS_ENDPOINT=wss://your-api-id.execute-api.us-west-2.amazonaws.com/prod
 ```
 Browser
   │
-  │ GitHub Pages
   ▼
-React + Vite + TypeScript Frontend
+GitHub Pages
+(React + Vite + TypeScript Frontend)
   │
   │ WebSocket
   ▼
 AWS API Gateway WebSocket API
-  │
-  ├── $connect       → connect Lambda
-  ├── $disconnect    → disconnect Lambda
-  └── sendMessage    → send_message Lambda
-                          │
-                          ▼
-                    DynamoDB ChatConnections
+  ├── $connect     → connect Lambda ───────┐
+  ├── $disconnect  → disconnect Lambda ────┼──→ DynamoDB ChatConnections
+  └── sendMessage  → send_message Lambda ──┘
 ```
 
 系統使用 API Gateway WebSocket API 負責連線管理，Lambda 負責處理連線、斷線與訊息廣播，DynamoDB 則用來記錄目前在線的 WebSocket connection。
