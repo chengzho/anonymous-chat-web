@@ -14,16 +14,7 @@
 
 ## Purpose
 
-處理新的 WebSocket connection。
-
-此 Lambda 會在使用者嘗試進入聊天室時被 API Gateway `$connect` route 觸發，主要負責：
-
-1. 驗證使用者的 `callsign`
-2. 驗證 shared access `passcode`
-3. 檢查目前在線人數是否超過 `MAX_CONNECTIONS`
-4. 將通過驗證的 `connectionId` 與使用者 `callsign` 寫入 DynamoDB
-
-DynamoDB 只會儲存目前有效的 WebSocket connections，不會儲存 passcode，也不會儲存聊天訊息。
+處理新的 WebSocket connection，此 Lambda 會在使用者嘗試進入聊天室時被 API Gateway `$connect` route 觸發，會檢查目前在線人數是否超過 `MAX_CONNECTIONS`，並將通過驗證的 `connectionId` 與使用者 `callsign` 寫入 DynamoDB。
 
 ## Input
 
@@ -38,22 +29,6 @@ query_params = event.get("queryStringParameters") or {}
 callsign = query_params.get("callsign")                  # mandatory, from client
 passcode = query_params.get("passcode")                  # mandatory, from client
 ```
-
-**Important:** `queryStringParameters` 可能是 `None`，因此實作時必須使用：
-
-```python
-query_params = event.get("queryStringParameters") or {}
-```
-
-避免在 `queryStringParameters` 為 `null` 時呼叫 `.get()` 造成 runtime error。
-
-**Example connection URL:**
-
-```
-wss://abc123.execute-api.us-west-2.amazonaws.com/prod?callsign=CoolDog&passcode=demo123
-```
-
-前端在建立 WebSocket connection 時，必須使用 `encodeURIComponent` 對 `callsign` 與 `passcode` 進行編碼。
 
 ## Validation Rules
 
@@ -85,68 +60,10 @@ wss://abc123.execute-api.us-west-2.amazonaws.com/prod?callsign=CoolDog&passcode=
    - connectionId (PK)
    - callsign
    - connectedAt (ISO 8601 UTC timestamp)
-8. Optional future enhancement:
-   - Broadcast a "user_joined" system event to existing connections
-9. Return 200
+8. Return 200
 ```
-
-## Passcode Validation
-
-The frontend does not store or validate the correct passcode.
-
-The frontend only sends the user-entered passcode during the WebSocket `$connect` handshake:
-
-```
-?callsign={callsign}&passcode={passcode}
-```
-
-The `$connect` Lambda validates the passcode by comparing its SHA-256 hash with the backend environment variable `CHAT_ACCESS_CODE_HASH`.
-
-**Example implementation logic:**
-
-```python
-import hashlib
-import hmac
-import os
-
-expected_hash = os.environ["CHAT_ACCESS_CODE_HASH"]
-actual_hash = hashlib.sha256(passcode.encode("utf-8")).hexdigest()
-
-if not hmac.compare_digest(actual_hash, expected_hash):
-    return {
-        "statusCode": 403,
-        "body": "Invalid passcode"
-    }
-```
-
-**Important:**
-
-- Do not store the plaintext passcode in **frontend code**.
-- Do not store the plaintext passcode in **GitHub**.
-- Do not store the plaintext passcode in **DynamoDB**.
-- Do not write the provided passcode to logs.
-- Only the SHA-256 hash should be stored as a backend environment variable.
 
 ## DynamoDB Operations
-
-### Optional active connection count
-
-If `MAX_CONNECTIONS` is configured, the Lambda checks the current number of active connections before accepting a new connection.
-
-For this demo-scale project, a simple scan is acceptable:
-
-```python
-response = table.scan(Select="COUNT")
-active_count = response.get("Count", 0)
-
-if active_count >= max_connections:
-    return {
-        "statusCode": 429,
-        "body": "Room capacity reached"
-    }
-```
-
-**Note:** This approach is acceptable for a small demo project. For production-scale systems, a more robust concurrency control design should be used, because scan-based counting is not ideal under high traffic or highly concurrent connection attempts.
 
 ### Write item
 
@@ -233,26 +150,13 @@ For the MVP version:
 
 The SAM template uses `DynamoDBCrudPolicy` for the `connect` Lambda, which covers the required DynamoDB operations for this demo project.
 
-### Optional future enhancement
-
-If `user_joined` system events are enabled in the future, this Lambda will also need:
-
-- `dynamodb:Scan` on the `ChatConnections` table
-- `execute-api:ManageConnections` on the WebSocket API
-
-However, for the MVP version, `connect` should not broadcast `user_joined` events. Its primary responsibility is to validate the connection and store the connection record quickly.
-
 ## Implementation Notes
 
 - The `callsign` and `passcode` are passed as query string parameters during the WebSocket handshake.
 - The `$connect` route does not have access to a request body.
 - Use `event.get("queryStringParameters") or {}` to handle missing or `null` query string parameters safely.
-- The `callsign` must be validated before writing anything to DynamoDB.
-- The `passcode` must be validated in the backend, not in the frontend.
 - The passcode should be hashed using SHA-256 and compared against `CHAT_ACCESS_CODE_HASH`.
 - Use `hmac.compare_digest()` when comparing hashes.
-- Do not log the plaintext passcode.
-- Do not store the passcode in DynamoDB.
 - The `connectedAt` timestamp is stored for informational purposes, such as debugging stale connections. It is not used in any query.
 - Keep the function fast. The WebSocket handshake has a timeout, so avoid heavy processing.
 - The `user_joined` broadcast is a nice-to-have feature. If implemented, it should be treated as a future enhancement or moved to an async flow to avoid slowing down the connection handshake.
@@ -276,18 +180,6 @@ However, for the MVP version, `connect` should not broadcast `user_joined` event
 ### Local environment variables
 
 For local testing, create an `env.json` file.
-
-Example passcode:
-
-```text
-demo123
-```
-
-SHA-256 hash of `demo123`:
-
-```text
-d3ad9315b7be5dd53b31a273b3b3aba5defe700808305aa16a3062b76658a791
-```
 
 Example `env.json`:
 
@@ -466,8 +358,6 @@ sam local invoke ConnectFunction -e events/connect_null_query_params.json --env-
 **Expected result:** Status 400 or 403, no runtime crash, no DynamoDB write.
 
 ### Test 7: Room capacity reached
-
-This test is optional and only applies when `MAX_CONNECTIONS` is enabled.
 
 **Pre-condition:** Insert enough records into DynamoDB Local so that the active connection count is equal to or greater than `MAX_CONNECTIONS`.
 

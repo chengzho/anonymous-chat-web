@@ -1,122 +1,65 @@
 # Anonymous Chatting Web — 匿名聊天室
 
-一個基於 **WebSocket** 的匿名即時聊天室，前端使用 React + Vite + TypeScript，部署於 GitHub Pages；後端使用 AWS API Gateway WebSocket API、AWS Lambda 與 DynamoDB 建立 serverless 即時訊息系統。
+一個安靜、輕量、快速進入的匿名聊天室。  
+使用者不需要註冊帳號，只要輸入暱稱與進入密碼，就能加入同一個聊天室進行即時對話。
 
-> 本專案以 Agentic AI Engineering workflow 為練習目標，重點放在系統規格設計、Pencil UI 設計、Claude Code 輔助實作、AWS serverless 後端部署，以及 GitHub Pages 前端部署。
+> 本網站以真實場景使用為目標，介面採用冷淡、柔和的霧藍灰色調，減少視覺干擾，讓使用者能自然、輕鬆地進行多人聊天。
 
 ---
 
 ## Demo
 
-- GitHub Pages：`https://chengzho.github.io/anonymous-chat-web/`
-- WebSocket Backend：AWS API Gateway WebSocket API
-
-> Demo URL 會在前端部署完成後啟用。
+GitHub Pages：https://chengzho.github.io/anonymous-chat-web/
 
 ---
 
 ## 專案特色
 
-- 匿名聊天室
-  - 不需要註冊帳號
-  - 使用者只需輸入暱稱即可進入聊天室
-
-- Shared Passcode Access Gate
-  - 進入聊天室前需要輸入 shared passcode
-  - 前端不儲存正確密碼
-  - 後端在 `$connect` Lambda 驗證 passcode hash
-
-- Real-time WebSocket Chat
-  - 使用 AWS API Gateway WebSocket API
-  - 訊息透過 WebSocket 即時廣播給所有在線使用者
-
-- Serverless Backend
-  - 使用 AWS Lambda 處理 connect、disconnect、sendMessage
-  - 使用 DynamoDB 儲存目前在線的 WebSocket connections
-  - 不儲存聊天紀錄
-
-- Static Frontend Hosting
-  - 前端部署於 GitHub Pages
-  - 使用 GitHub Actions 自動部署
-
-- AI-assisted Development Workflow
-  - 使用 Pencil 產生 UI 設計稿
-  - 使用 Claude Code 根據規格文件協助實作前後端
-  - 使用 AWS SAM 定義與部署 serverless resources
+- 匿名聊天室，使用者不需要註冊帳號
+- 使用 shared passcode 控制聊天室進入權限
+- 前端不儲存正確密碼，密碼驗證由後端 `$connect` Lambda 處理
+- 使用 WebSocket 建立即時多人聊天功能
+- 訊息即時廣播給所有在線使用者
+- DynamoDB 僅儲存目前有效連線，不儲存聊天紀錄
+- 使用 GitHub Pages 部署前端
+- 使用 AWS API Gateway WebSocket API、Lambda、DynamoDB 建立 serverless backend
 
 ---
 
 ## Tech Stack
 
-### Frontend
-
-- React
-- TypeScript
-- Vite
-- CSS
-- GitHub Pages
-- GitHub Actions
-
-### Backend
-
-- AWS API Gateway v2 WebSocket API
-- AWS Lambda
-- Python 3.12
-- DynamoDB
-- AWS SAM
-
-### Development Workflow
-
-- Pencil
-- Claude Code
-- GitHub
-- Docker
-- AWS CLI
-- SAM CLI
+| Layer | Technology |
+|---|---|
+| Frontend | React, Vite, TypeScript |
+| Styling | CSS, Responsive Web Design |
+| Hosting | GitHub Pages |
+| Real-time API | AWS API Gateway WebSocket API |
+| Backend | AWS Lambda, Python 3.12 |
+| Database | DynamoDB |
+| Infrastructure | AWS SAM, CloudFormation |
+| Deployment | GitHub Actions, SAM CLI |
+| AI-assisted Workflow | Pencil, Claude Code |
 
 ---
 
-## 系統架構
+## 專案畫面
 
-```text
-Browser
-  ↓
-GitHub Pages Frontend
-  ↓ WebSocket
-API Gateway WebSocket API
-  ↓
-Lambda Functions
-  ├── connect
-  ├── disconnect
-  └── send_message
-  ↓
-DynamoDB ChatConnections
-```
-
----
-
-## 專案結構
-
-```text
-anonymous-chat-web/
-├── documents/                      # 系統設計與規格文件
-├── webui/                          # Frontend: React + Vite + TypeScript
-├── lambda/
-│   ├── connect/                    # $connect Lambda
-│   ├── disconnect/                 # $disconnect Lambda
-│   └── send_message/               # sendMessage Lambda
-├── .github/
-│   └── workflows/                  # GitHub Actions workflow
-├── template.yaml                   # AWS SAM template
-├── README.md
-└── .gitignore
-```
+<p align="center">
+  <img src="./docs/screenshots/mobile-welcome.jpg" alt="Mobile View" width="260" />
+  <img src="./docs/screenshots/mobile-chat.jpg" alt="Desktop View" width="260" />
+</p>
+<p align="center">
+  <img src="./docs/screenshots/desktop-welcome.png" alt="Mobile View" width="520" />
+</p>
+<p align="center">
+  <img src="./docs/screenshots/desktop-chat.png" alt="Mobile View" width="520" />
+</p>
 
 ---
 
 ## 本地開發
 
-### Frontend
+前端專案位於 `webui/`。
 
 ```bash
 cd webui
@@ -124,76 +67,48 @@ npm install
 npm run dev
 ```
 
-建立 `webui/.env.local`：
+若要在本機連接已部署的 AWS WebSocket backend，請在 `webui/` 下建立 `.env.local`：
 
-```text
-VITE_WS_ENDPOINT=wss://{your-api-id}.execute-api.{region}.amazonaws.com/prod
+```
+VITE_WS_ENDPOINT=wss://your-api-id.execute-api.us-west-2.amazonaws.com/prod
 ```
 
-### Backend
-
-確認工具已安裝：
+接著重新啟動 Vite dev server：
 
 ```bash
-aws --version
-sam --version
-python3 --version
-docker --version
+npm run dev
 ```
 
-部署前需先設定 AWS CLI：
-
-```bash
-aws configure
-```
-
-確認目前 AWS identity：
-
-```bash
-aws sts get-caller-identity
-```
+請注意，`.env.local` 僅供本機開發使用，不應提交到 GitHub。
 
 ---
 
 ## Shared Passcode 設定
 
-本專案使用 shared passcode 作為聊天室進入限制。
+本專案使用 shared passcode 作為聊天室的進入限制。使用者在前端輸入的進入密碼會在 WebSocket `$connect` 階段傳送到後端，由 `connect` Lambda 進行驗證。
 
-正式設計中：
+前端不會儲存或驗證正確密碼，也不會將正確密碼 hardcode 在程式碼中，部署後端前，需要先產生 passcode 的 SHA-256 hash。
 
-- 前端只收集使用者輸入的 passcode
-- 前端不儲存正確 passcode
-- 正確 passcode 不應寫入 GitHub
-- 後端只保存 passcode 的 SHA-256 hash
-- `$connect` Lambda 負責驗證 passcode
-
-產生 passcode hash：
-
-```bash
-python3 - <<'PY'
-import hashlib
-import getpass
-
-passcode = getpass.getpass("Enter shared chat passcode: ")
-print(hashlib.sha256(passcode.encode("utf-8")).hexdigest())
-PY
-```
-
-產生的 hash 會在 `sam deploy --guided` 時作為 `ChatAccessCodeHash` parameter 輸入。
+產生的 64 字元 hash 會在 AWS SAM 部署時作為 `ChatAccessCodeHash` 參數傳入。明文 passcode 僅由專案管理者保存，並提供給允許進入聊天室的使用者。
 
 ---
 
 ## AWS Backend Deployment
 
-Validate SAM template：
+後端使用 AWS SAM 部署，主要資源包含 API Gateway WebSocket API、三個 Lambda functions，以及 DynamoDB table。
+
+部署前請確認 AWS CLI 與 SAM CLI 已設定完成：
+
+```bash
+aws --version
+sam --version
+aws sts get-caller-identity
+```
+
+建置並驗證 SAM template：
 
 ```bash
 sam validate --template template.yaml
-```
-
-Build：
-
-```bash
 sam build
 ```
 
@@ -203,77 +118,96 @@ sam build
 sam deploy --guided
 ```
 
-後續部署：
+部署時需要設定：
 
-```bash
-sam deploy
 ```
-
-取得 WebSocket endpoint：
-
-```bash
-aws cloudformation describe-stacks \
-  --stack-name anonymous-chat \
-  --query "Stacks[0].Outputs[?OutputKey=='WebSocketUrl'].OutputValue" \
-  --output text
+Stack Name: anonymous-chat-web
+AWS Region: us-west-2
+ChatAccessCodeHash: <SHA-256 hash of shared passcode>
+MaxConnections: 10
 ```
 
 ---
 
 ## Frontend Deployment
 
-本專案前端部署於 GitHub Pages。
+前端透過 GitHub Actions 部署到 GitHub Pages。
 
-GitHub Actions 需要設定：
+GitHub repository 需要設定一個 Actions secret：
 
-```text
-VITE_WS_ENDPOINT
+```
+VITE_WS_ENDPOINT=wss://your-api-id.execute-api.us-west-2.amazonaws.com/prod
 ```
 
-此值為 AWS 部署完成後取得的 WebSocket endpoint，例如：
+當程式 push 到 `main` branch 後，GitHub Actions 會自動進入 `webui/`，安裝 dependencies，執行 build，並將 `webui/dist` 部署到 GitHub Pages。
 
-```text
-wss://{api-id}.execute-api.{region}.amazonaws.com/prod
+---
+
+## 系統架構
+
+```
+Browser
+  │
+  │ GitHub Pages
+  ▼
+React + Vite + TypeScript Frontend
+  │
+  │ WebSocket
+  ▼
+AWS API Gateway WebSocket API
+  │
+  ├── $connect       → connect Lambda
+  ├── $disconnect    → disconnect Lambda
+  └── sendMessage    → send_message Lambda
+                          │
+                          ▼
+                    DynamoDB ChatConnections
 ```
 
-> 注意：不要將聊天室 passcode 放入前端環境變數。`VITE_` 開頭的環境變數會被打包進前端程式碼。
+系統使用 API Gateway WebSocket API 負責連線管理，Lambda 負責處理連線、斷線與訊息廣播，DynamoDB 則用來記錄目前在線的 WebSocket connection。
+
+聊天訊息不會被儲存，DynamoDB 只保存目前在線使用者的 `connectionId`、`callsign` 與 `connectedAt`。
+
+---
+
+## 專案結構
+
+```
+anonymous-chat-web/
+├── documents/
+├── webui/
+├── lambda/
+│   ├── connect/
+│   ├── disconnect/
+│   └── send_message/
+├── events/
+├── .github/
+│   └── workflows/
+├── template.yaml
+├── README.md
+└── .gitignore
+```
 
 ---
 
 ## 設計與開發流程
 
-本專案的設計與實作流程大致如下：
-
-1. 撰寫系統架構、API、Lambda 與前端設計規格文件
-2. 使用 Pencil 根據規格文件產生 UI 設計稿
-3. 使用 Claude Code 根據設計稿與 markdown specifications 實作前端
-4. 使用 Claude Code 根據 Lambda specifications 與 AWS configuration 實作後端
-5. 使用 AWS SAM 部署 API Gateway、Lambda 與 DynamoDB
-6. 使用 GitHub Actions 將前端部署到 GitHub Pages
-7. 進行端對端測試與修正
+1. 撰寫系統架構與 API 規格文件
+2. 使用 Pencil 根據需求與前端設計文件產生 UI 設計稿（`.pen`）
+3. 使用 Claude Code 根據文件與設計稿協作 React 前端
+4. 使用 Claude Code 根據 Lambda 規格與 AWS 設定文件協作後端
+5. 使用 AWS SAM 部署 serverless backend
+6. 使用 GitHub Actions 部署 GitHub Pages frontend
+7. 進行 WebSocket 測試
 
 ---
 
 ## 後續延伸方向
 
-未來可以進一步延伸：
-
-- 顯示目前在線人數
-- 加入 user joined / user left system events
+- 加入使用者加入 / 離開聊天室的 system message 廣播
+- 增加聊天室人數顯示
+- 增加訊息送出失敗提示與重試機制
 - 加入深色模式
-- 加入聊天室主題切換
-- 加入訊息時間排序與簡易 message ID
-- 加入更完整的 rate limiting 或 abuse protection
-- 使用 CloudWatch Dashboard 觀察 WebSocket traffic 與 Lambda logs
-
----
-
-## Notes
-
-此專案為 workshop / portfolio demo 用途，重點是展示：
-
-- Agentic AI-assisted development workflow
-- Serverless WebSocket architecture
-- GitHub Pages frontend deployment
-- AWS Lambda backend deployment
-- Prompt-driven specification-first development
+- 加入多聊天室或 room code 設計
+- 使用更完整的 rate limiting 或 WebSocket connection control
+- 建立更嚴格的 IAM least-privilege deployment policy

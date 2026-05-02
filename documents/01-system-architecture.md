@@ -2,28 +2,30 @@
 
 ## 專案名稱
 
-**Anonymous WebSocket Chat** — 一個 serverless、single-channel、匿名聊天室系統，可透過手機與桌面瀏覽器使用。
+**Anonymous Chatting Web** — 一個 serverless、single-channel、匿名聊天室系統，可透過手機與桌面瀏覽器使用。
+
+**Repository:** `git@github.com:chengzho/anonymous-chat-web.git`
 
 ## 專案目標
 
 - 提供匿名聊天室服務，不需要使用者註冊帳號
 - 使用 shared passcode 作為聊天室進入限制，避免未授權使用者或過多人同時進入
 - Single global channel，所有成功連線的使用者都能看到所有即時訊息
-- 透過 WebSocket 進行 Real-time 訊息傳遞
+- 透過 WebSocket 進行 real-time 訊息傳遞
 - 後端完全建置於 AWS serverless 架構
 - 前端靜態網站部署於 GitHub Pages
 - 最大限度維持架設簡單、成本低、易於部署與展示
 
 ## 高階系統架構
 
-```
+```text
 ┌─────────────────────────────┐
 │   Browser (React)           │
 │   GitHub Pages Host         │
 │                             │
 │   Access Gate:              │
 │   - nickname input          │
-│   - passcode input          │
+│   - access passcode input   │
 └──────────────┬──────────────┘
                │ WebSocket (wss://)
                │ ?callsign=...&passcode=...
@@ -38,9 +40,12 @@
 │  AWS Lambda (x3)            │
 │  Python 3.12                │
 ├─────────────────────────────┤
-│  connect.handler            │──▶ Validate callsign and passcode, DynamoDB PUT (store connectionId, callsign, connectedAt)
-│  disconnect.handler         │──▶ DynamoDB DELETE (remove connectionId)
-│  send_message.handler       │──▶ DynamoDB SCAN + PostToConnection fan-out
+│  connect.handler            │──▶ Validate callsign and passcode
+│                             │──▶ Optional: check MAX_CONNECTIONS
+│                             │──▶ DynamoDB PUT (connectionId, callsign, connectedAt)
+│  disconnect.handler         │──▶ DynamoDB DELETE (connectionId)
+│  send_message.handler       │──▶ DynamoDB GET sender callsign
+│                             │──▶ DynamoDB SCAN + PostToConnection fan-out
 └──────────────┬──────────────┘
                │
                ▼
@@ -69,11 +74,11 @@
 ### 使用者進入聊天室
 
 1. 使用者透過瀏覽器開啟 GitHub Pages 網址
-2. 前端顯示進入頁面，包含大標題「匿名聊天室」、暱稱輸入框、passcode 輸入框
-3. 使用者輸入 callsign 與 passcode 後，瀏覽器開啟 WebSocket 連線至 API Gateway endpoint
+2. 前端顯示進入頁面，包含標題匿名聊天室、暱稱輸入框、進入密碼輸入框
+3. 使用者輸入暱稱與進入密碼後，瀏覽器開啟 WebSocket 連線至 API Gateway endpoint。前端會將暱稱映射為 `callsign` query parameter，將進入密碼映射為 `passcode` query parameter
 4. WebSocket 連線 URL 會帶上 query string：
 
-```text
+```
 wss://{api-id}.execute-api.{region}.amazonaws.com/{stage}?callsign={callsign}&passcode={passcode}
 ```
 
@@ -128,17 +133,17 @@ shared passcode 的目的只是作為簡單的 access gate：
 - 降低 workshop demo 或展示時被過多人同時連線的風險
 - 維持匿名性與系統簡潔度
 
-正確的設計是：前端只負責收集 passcode，真正的 passcode 驗證必須在 `$connect` Lambda 中完成。前端不應 hardcode 或儲存正確密碼，因為 GitHub Pages 是靜態網站，所有前端程式碼都可能被使用者檢視。
+正確的設計是：前端只負責收集使用者輸入的進入密碼，真正的 passcode 驗證必須在 `$connect` Lambda 中完成。前端不應 hardcode 或儲存正確密碼，因為 GitHub Pages 是靜態網站，所有前端程式碼都可能被使用者檢視。
 
 ### 為什麼 DynamoDB 只儲存 connections，而不儲存訊息？
 
-DynamoDB 在本專案中只儲存目前有效的 WebSocket connections，不儲存聊天訊息。它的角色類似「在線使用者通訊錄」，讓 `sendMessage` Lambda 能知道目前有哪些 connection 需要接收廣播訊息。
+DynamoDB 在本專案中只儲存目前有效的 WebSocket connections，不儲存聊天訊息，這個角色類似「在線使用者通訊錄」，讓 `sendMessage` Lambda 能知道目前有哪些 connection 需要接收廣播訊息。
 
 Lambda 本身是 stateless 的，不同 invocation 之間沒有共享記憶體，因此需要外部儲存來追蹤目前在線的 WebSocket connections。DynamoDB 是最輕量的 serverless 選項：單一資料表、無需自行管理伺服器、使用 on-demand billing，適合低流量 demo。
 
 ### 為什麼不保留聊天紀錄？
 
-這是刻意的設計選擇。訊息只會即時傳送給當下在線的使用者，不會被保存。
+這是刻意設計的選擇，訊息只會即時傳送給當下在線的使用者，不會被保存。
 
 這樣設計的優點包括：
 
@@ -161,41 +166,25 @@ shared passcode 可以避免未知使用者進入，但無法限制知道密碼�
 
 ## Repository Structure
 
-```text
+```
 anonymous-chat-web/
+├── documents/                      # Design and spec documents
 ├── webui/                          # Frontend (React + Vite + TypeScript)
-│   ├── src/
-│   │   ├── App.tsx
-│   │   ├── main.tsx
-│   │   └── ...
-│   ├── package.json
-│   ├── tsconfig.json
-│   └── vite.config.ts
 ├── lambda/
 │   ├── connect/                    # $connect Lambda
-│   │   ├── connect.py
-│   │   └── requirements.txt
 │   ├── disconnect/                 # $disconnect Lambda
-│   │   ├── disconnect.py
-│   │   └── requirements.txt
 │   └── send_message/               # sendMessage Lambda
-│       ├── send_message.py
-│       └── requirements.txt
-├── documents/                      # Design and spec documents
-│   ├── 01-system-architecture.md
-│   ├── 02-api-specification.md
-│   ├── 03-aws-configuration.md
-│   ├── 04-lambda-connect-spec.md
-│   ├── 05-lambda-disconnect-spec.md
-│   ├── 06-lambda-send-message-spec.md
-│   └── 07-frontend-design.md
+├── events/                         # SAM local test events
+├── .github/
+│   └── workflows/                  # GitHub Actions workflow
 ├── template.yaml                   # SAM template
-└── README.md
+├── README.md
+└── .gitignore
 ```
 
 ## 低使用量成本估計
 
-對於 demo 或教育用途，若只有少量同時在線使用者，所有主要元件都可維持在 AWS free tier 或極低成本範圍內：
+對於 demo 用途，若只有少量同時在線使用者，可維持在 AWS free tier 或極低成本範圍內：
 
 - **Lambda:** 每月 1M free requests
 - **API Gateway WebSocket:** 前 12 個月每月 1M messages free

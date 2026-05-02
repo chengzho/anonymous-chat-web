@@ -18,10 +18,10 @@ wss://{api-id}.execute-api.{region}.amazonaws.com/{stage}?callsign={callsign}&pa
 
 其中：
 
-- `callsign` 是使用者在聊天室中顯示的匿名名稱
-- `passcode` 是 shared access passcode，只用於進入聊天室的驗證
-- 前端應使用 `encodeURIComponent` 對 `callsign` 與 `passcode` 進行編碼
-- `passcode` 不會被寫入 DynamoDB，也不會出現在後續的聊天訊息 payload 中
+- `callsign` 是使用者在聊天室中顯示的匿名名稱，使用者介面顯示為暱稱，前端送出時映射為 `callsign`。
+- `passcode` 是 shared access passcode，使用者介面顯示為進入密碼，只用於進入聊天室的驗證。
+- 前端應使用 `encodeURIComponent` 對 `callsign` 與 `passcode` 進行編碼。
+- `passcode` 不會被寫入 DynamoDB，也不會出現在後續的聊天訊息 payload 中。
 
 ## Route Selection
 
@@ -50,7 +50,7 @@ Route Selection Expression: $request.body.action
 
 **Example connection URL:**
 
-```text
+```
 wss://abc123.execute-api.us-west-2.amazonaws.com/prod?callsign=CoolDog&passcode=demo123
 ```
 
@@ -202,7 +202,7 @@ apigw.post_to_connection(
 
 除了聊天訊息之外，server 也可以選擇性推送 system events，例如使用者加入或離開聊天室。
 
-這部分屬於 optional feature。MVP 版本可以先不實作，避免 `$connect` 與 `$disconnect` Lambda 增加額外延遲與權限複雜度。
+這部分屬於 optional feature。MVP 版本先不實作，避免 `$connect` 與 `$disconnect` Lambda 增加額外延遲與權限複雜度。
 
 **User joined:**
 

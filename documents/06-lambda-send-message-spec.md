@@ -173,27 +173,23 @@ for conn in connections:
 
 ## Implementation Notes
 
-- Sender receives their own message. The broadcast loop sends to all connections including the sender. This simplifies the frontend — it can treat all messages the same way and use the server timestamp for ordering.
-- Callsign lookup is from DynamoDB, not from the message body. This is a deliberate security decision. Even though there is no full user authentication, this prevents trivial callsign spoofing by trusting only the stored callsign for each `connectionId`.
-- The message text should be stripped before validation. Whitespace-only messages should be rejected.
-- DynamoDB Scan pagination: For this educational project, a single scan is usually sufficient. If the table exceeds 1 MB of data, the scan response includes a `LastEvaluatedKey` and the implementation must paginate:
+- **Sender receives their own message.** The broadcast loop sends to all connections including the sender. This simplifies the frontend — it can treat all messages the same way and use the server timestamp for ordering.
+- **Callsign lookup from DynamoDB, not from body.** This is a deliberate security decision. Even though there is no authentication, we prevent trivial callsign spoofing by trusting only the stored callsign for each `connectionId`.
+- **DynamoDB Scan pagination.** For this educational project, a single scan is sufficient. If the table exceeds 1 MB of data (unlikely for a demo), the scan response includes a `LastEvaluatedKey` and you must paginate. The implementation should handle this:
 
-```python
-connections = []
-scan_kwargs = {"ProjectionExpression": "connectionId"}
+  ```python
+  connections = []
+  scan_kwargs = {"ProjectionExpression": "connectionId"}
+  while True:
+      response = table.scan(**scan_kwargs)
+      connections.extend(response["Items"])
+      if "LastEvaluatedKey" not in response:
+          break
+      scan_kwargs["ExclusiveStartKey"] = response["LastEvaluatedKey"]
+  ```
 
-while True:
-    response = table.scan(**scan_kwargs)
-    connections.extend(response["Items"])
-
-    if "LastEvaluatedKey" not in response:
-        break
-
-    scan_kwargs["ExclusiveStartKey"] = response["LastEvaluatedKey"]
-```
-
-- PostToConnection ordering: Messages may arrive at different clients in slightly different order if network latency varies. For a single-channel chat room this is acceptable. No sequence numbering is implemented.
-- Boto3 client for `apigatewaymanagementapi`: The management API client must be created with the `endpoint_url` constructed from the event's `domainName` and `stage`. This cannot be a module-level constant because the endpoint is only known at runtime.
+- **PostToConnection ordering.** Messages may arrive at different clients in slightly different order if network latency varies. For a single-channel chat room this is acceptable. No sequence numbering is implemented.
+- **Bot client for `apigatewaymanagementapi`.** The `boto3.client` for the management API must be created with the `endpoint_url` constructed from the event's `domainName` and `stage`. This cannot be a module-level constant because the endpoint is only known at runtime.
 
 ## Error Handling
 
@@ -207,6 +203,21 @@ while True:
 | DynamoDB scan fails | Log, return 500 |
 
 ## SAM Local Test Plan
+
+### Local environment variables
+
+For local testing, create an `env.json` file.
+
+Example `env.json`:
+
+```json
+{
+  "SendMessageFunction": {
+    "TABLE_NAME": "ChatConnections",
+    "DYNAMODB_ENDPOINT": "http://host.docker.internal:8000"
+  }
+}
+```
 
 ### Test 1: Successful message broadcast
 

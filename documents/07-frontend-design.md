@@ -2,12 +2,12 @@
 
 ## Overview
 
-一個 responsive web application (RWD)，用於匿名即時聊天。前端使用 React + Vite + TypeScript 建置，並部署於 GitHub Pages。
+一個 responsive web application (RWD) web，用於匿名即時聊天。前端使用 React + Vite + TypeScript 建置，並部署於 GitHub Pages。
 
 **Repository:** `git@github.com:chengzho/anonymous-chat-web.git`
 **Code location:** `webui/`
 
-## Technology Stack
+## Tech Stack
 
 | Technology | Version | Purpose |
 |-----------|---------|---------|
@@ -38,20 +38,20 @@
 ┌────────────────────────┐
 │  2. Chat Screen        │
 │                        │
+│  Status: Connected     │
 │  ┌──────────────────┐  │
 │  │ Message List     │  │
 │  │ (scrollable)     │  │
 │  │                  │  │
-│  │ CoolDog: Hello   │  │
-│  │ Ghost42: Hey!    │  │
-│  │ [system] X left  │  │
+│  │ A: Hello         │  │
+│  │ B: Hey!          │  │
+│  │                  │  │
 │  └──────────────────┘  │
 │                        │
 │  ┌────────────┐ [Send] │
 │  │ Type here..│        │
 │  └────────────┘        │
 │                        │
-│  Status: Connected     │
 └────────────────────────┘
 ```
 
@@ -212,7 +212,7 @@ interface AppState {
 
 ## Component Structure
 
-```text
+```
 webui/src/
 ├── App.tsx                  # Root: routes between WelcomeScreen and ChatScreen
 ├── main.tsx                 # Entry point

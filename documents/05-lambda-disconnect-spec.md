@@ -14,9 +14,7 @@
 
 ## Purpose
 
-處理 WebSocket disconnection。
-
-此 Lambda 會在使用者離開聊天室、關閉瀏覽器分頁、網路中斷，或 WebSocket connection timeout 時，由 API Gateway `$disconnect` route 自動觸發。
+處理 WebSocket disconnection，此 Lambda 會在使用者離開聊天室、關閉瀏覽器分頁、網路中斷，或 WebSocket connection timeout 時，由 API Gateway `$disconnect` route 自動觸發。
 
 MVP 版本中，此 Lambda 的主要責任是：
 
@@ -34,18 +32,11 @@ MVP 版本中，此 Lambda 的主要責任是：
 
 ```python
 connection_id = event["requestContext"]["connectionId"]  # mandatory, provided by API Gateway
-```
-
-If optional `user_left` system events are implemented in the future, the following fields may also be used:
-
-```python
 domain_name = event["requestContext"]["domainName"]       # for broadcast endpoint
 stage = event["requestContext"]["stage"]                  # for broadcast endpoint
 ```
 
-**No query string parameters or body.**
-
-The `$disconnect` event only provides `requestContext`. It does not include the original `callsign`, `passcode`, or message body.
+**No query string parameters or body.** The `$disconnect` event only provides `requestContext`.
 
 ## Processing Logic
 
@@ -53,28 +44,10 @@ The `$disconnect` event only provides `requestContext`. It does not include the 
 
 ```
 1. Extract connectionId from event.requestContext.connectionId
-
 2. Delete the connectionId from DynamoDB:
    - Key: {"connectionId": connection_id}
-
 3. Return 200
 ```
-
-### Optional Future Enhancement: user_left system event
-
-If `user_left` system events are enabled in the future, the processing logic can be extended:
-
-```
-1. Extract connectionId from event.requestContext.connectionId
-2. Read the connection item from DynamoDB to get the callsign:
-   - If the item does not exist, use "unknown" or skip the broadcast
-3. Delete the connectionId from DynamoDB
-4. Scan remaining active connections
-5. Broadcast a "user_left" system event to all remaining connections using PostToConnection
-6. Return 200
-```
-
-For the MVP version, do not broadcast `user_left` events. The primary responsibility of this Lambda is to clean up the connection record quickly and reliably.
 
 ## DynamoDB Operations
 
@@ -85,27 +58,6 @@ MVP version only requires a delete operation:
 ```python
 table.delete_item(Key={"connectionId": connection_id})
 ```
-
-DynamoDB `DeleteItem` is idempotent. If the item does not exist, the operation does not fail. This is useful because `$disconnect` may be triggered after a stale connection has already been cleaned up by another Lambda, such as `send_message`.
-
-### Optional: Read item before deletion
-
-If `user_left` system events are implemented in the future, the Lambda may read the connection item before deletion to retrieve the user's `callsign`:
-
-```python
-response = table.get_item(Key={"connectionId": connection_id})
-callsign = response.get("Item", {}).get("callsign", "unknown")
-```
-
-### Optional: Scan remaining connections
-
-If broadcasting `user_left` events, the Lambda must scan the remaining active connections after deleting the disconnected connection:
-
-```python
-connections = table.scan(ProjectionExpression="connectionId")["Items"]
-```
-
-For production-scale systems, DynamoDB scan pagination should be handled. For this demo-scale project, a simple scan is acceptable if the feature is enabled.
 
 ## Output
 
@@ -140,21 +92,10 @@ For production-scale systems, DynamoDB scan pagination should be handled. For th
 
 ## IAM Permissions Required
 
-For the MVP version:
-
-- `dynamodb:DeleteItem` on the `ChatConnections` table
-
-The SAM template uses `DynamoDBCrudPolicy` for the `disconnect` Lambda, which covers the required DynamoDB operation for this demo project.
-
-### Optional future enhancement
-
-If `user_left` system events are enabled in the future, this Lambda will also need:
-
-- `dynamodb:GetItem` on the `ChatConnections` table
-- `dynamodb:Scan` on the `ChatConnections` table
-- `execute-api:ManageConnections` on the WebSocket API
-
-Without `execute-api:ManageConnections`, the Lambda cannot call API Gateway Management API's `PostToConnection`.
+- `dynamodb:GetItem` on the Connections table
+- `dynamodb:DeleteItem` on the Connections table
+- `dynamodb:Scan` on the Connections table (for broadcasting leave event)
+- `execute-api:ManageConnections` (for broadcasting leave event)
 
 ## Implementation Notes
 
@@ -236,12 +177,6 @@ aws dynamodb get-item \
   --table-name ChatConnections \
   --key '{"connectionId":{"S":"test-conn-001"}}' \
   --endpoint-url http://localhost:8000
-```
-
-Expected result:
-
-```
-Empty response. The item should be gone.
 ```
 
 ### Test 2: Disconnect for non-existent connection
