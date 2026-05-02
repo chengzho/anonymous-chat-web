@@ -1,0 +1,12 @@
+{
+  "requestContext": {
+    "connectionId": "test-conn-004",
+    "routeKey": "$connect",
+    "eventType": "CONNECT",
+    "domainName": "localhost",
+    "stage": "prod"
+  },
+  "queryStringParameters": {
+    "callsign": "TestUser"
+  }
+}

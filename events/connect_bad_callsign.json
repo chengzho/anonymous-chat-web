@@ -1,0 +1,13 @@
+{
+  "requestContext": {
+    "connectionId": "test-conn-003",
+    "routeKey": "$connect",
+    "eventType": "CONNECT",
+    "domainName": "localhost",
+    "stage": "prod"
+  },
+  "queryStringParameters": {
+    "callsign": "ThisCallsignIsWayTooLongToBeValid",
+    "passcode": "demo123"
+  }
+}

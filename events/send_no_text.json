@@ -1,0 +1,10 @@
+{
+  "requestContext": {
+    "connectionId": "sender-conn-001",
+    "routeKey": "sendMessage",
+    "eventType": "MESSAGE",
+    "domainName": "localhost",
+    "stage": "prod"
+  },
+  "body": "{\"action\":\"sendMessage\"}"
+}

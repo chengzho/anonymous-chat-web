@@ -1,0 +1,10 @@
+{
+  "requestContext": {
+    "connectionId": "unknown-conn-999",
+    "routeKey": "sendMessage",
+    "eventType": "MESSAGE",
+    "domainName": "localhost",
+    "stage": "prod"
+  },
+  "body": "{\"action\":\"sendMessage\",\"text\":\"Who am I?\"}"
+}

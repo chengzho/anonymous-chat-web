@@ -1,0 +1,9 @@
+{
+  "requestContext": {
+    "connectionId": "non-existent-conn",
+    "routeKey": "$disconnect",
+    "eventType": "DISCONNECT",
+    "domainName": "localhost",
+    "stage": "prod"
+  }
+}

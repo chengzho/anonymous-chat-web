@@ -1,0 +1,8 @@
+{
+  "requestContext": {
+    "routeKey": "$disconnect",
+    "eventType": "DISCONNECT",
+    "domainName": "localhost",
+    "stage": "prod"
+  }
+}

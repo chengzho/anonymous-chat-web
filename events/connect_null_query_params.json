@@ -1,0 +1,10 @@
+{
+  "requestContext": {
+    "connectionId": "test-conn-006",
+    "routeKey": "$connect",
+    "eventType": "CONNECT",
+    "domainName": "localhost",
+    "stage": "prod"
+  },
+  "queryStringParameters": null
+}
